@@ -1,0 +1,86 @@
+name: darkverse
+description: "B"
+publish_to: 'none'
+version: 2.0.0
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # HTTP & NETWORK
+  http: ^0.13.5
+  web_socket_channel: ^2.4.0
+  socket_io_client: ^3.1.6
+  network_info_plus: ^4.1.0
+  device_info_plus: ^10.1.0
+  url_launcher: ^6.2.6
+  
+  # UI & MEDIA
+  cupertino_icons: ^1.0.8
+  font_awesome_flutter: ^10.7.0
+  video_player: ^2.9.2
+  chewie: ^1.5.2
+  shimmer: ^3.0.0
+  carousel_slider: 4.0.0
+  
+  # STORAGE & PERMISSION
+  shared_preferences: ^2.2.2
+  path_provider: ^2.1.1
+  permission_handler: ^11.0.0
+  
+  # IMAGE PICKER
+  image_picker: ^1.0.7
+  
+  # INTl
+  intl: ^0.19.0
+  
+  # SHARE
+  share_plus: ^7.0.1
+  
+  # WEBVIEW
+  webview_flutter: ^4.13.1
+
+  # ==== INFO SISTEM (DIUBAH SEMUA KE VERSI STABIL) ====
+  battery_plus: ^5.0.0
+  connectivity_plus: ^5.0.0
+  disk_space_plus: ^0.2.6
+  system_info2: ^2.0.2
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path_android: assets/icon/icon.jpg
+  image_path_ios: assets/icon/icon/icon.jpg
+  image_path: assets/icon/icon.jpg
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/logo.jpg
+    - assets/images/logo.png
+    - assets/videos/splash.mp4
+    - assets/videos/bug.mp4
+    - assets/videos/otaxai.mp4
+    - assets/videos/splashd.mp4
+    - assets/videos/landingvidio.mp4
+    - assets/videos/landing.mp4
+    - assets/videos/dasbordbegron.mp4
+
+  fonts:
+    - family: Orbitron
+      fonts:
+        - asset: fonts/Orbitron-Regular.ttf
+    - family: ShareTechMono
+      fonts:
+        - asset: fonts/ShareTechMono-Regular.ttf
