@@ -70,6 +70,7 @@ flutter:
     - assets/images/logo.jpg
     - assets/images/logo.png
     - assets/videos/splash.mp4
+    - assets/videos/background.mp4
     - assets/videos/bug.mp4
     - assets/videos/otaxai.mp4
     - assets/videos/splashd.mp4

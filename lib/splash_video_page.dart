@@ -51,14 +51,27 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     _fadeCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 1000));
     _glowAnim = Tween<double>(begin: 0.3, end: 1.0).animate(CurvedAnimation(parent: _glowCtrl, curve: Curves.easeInOut));
     _fadeAnim = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: _fadeCtrl, curve: Curves.easeOut));
-    _videoController = VideoPlayerController.asset('assets/videos/splash.mp4')
+    _videoController = VideoPlayerController.asset('assets/videos/background.mp4')
       ..initialize().then((_) {
         setState(() => _videoInitialized = true);
         _videoController.play();
         _videoController.setVolume(1.0);
-        _videoController.setLooping(true);
+        _videoController.setLooping(false);
         _fadeCtrl.forward();
-      }).catchError((_) => _fadeCtrl.forward());
+
+        _videoController.addListener(() {
+          if (!_videoController.value.isInitialized) return;
+
+          final position = _videoController.value.position;
+          final duration = _videoController.value.duration;
+
+          if (duration > Duration.zero &&
+              position >= duration &&
+              !_videoController.value.isPlaying) {
+            _goNext();
+          }
+        });
+      }).catchError((_) { _fadeCtrl.forward(); _goNext(); });
   }
 
   @override
@@ -175,7 +188,7 @@ class _SplashVideoPageState extends State<SplashVideoPage> with TickerProviderSt
     _glowAnim = Tween<double>(begin: 0.3, end: 1.0).animate(CurvedAnimation(parent: _glowCtrl, curve: Curves.easeInOut));
     _fadeAnim = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: _fadeCtrl, curve: Curves.easeOut));
 
-    _videoController = VideoPlayerController.asset('assets/videos/splash.mp4')
+    _videoController = VideoPlayerController.asset('assets/videos/background.mp4')
       ..initialize().then((_) {
         setState(() => _videoInitialized = true);
         _videoController.play();
@@ -184,10 +197,8 @@ class _SplashVideoPageState extends State<SplashVideoPage> with TickerProviderSt
         _fadeCtrl.forward();
       }).catchError((_) {
         _fadeCtrl.forward();
-        Future.delayed(const Duration(milliseconds: 300), _goNext);
       });
 
-    Future.delayed(const Duration(milliseconds: 800), _goNext);
   }
 
   void _goNext() {
