@@ -59,19 +59,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         _videoController.setLooping(false);
         _fadeCtrl.forward();
 
-        _videoController.addListener(() {
-          if (!_videoController.value.isInitialized) return;
-
-          final position = _videoController.value.position;
-          final duration = _videoController.value.duration;
-
-          if (duration > Duration.zero &&
-              position >= duration &&
-              !_videoController.value.isPlaying) {
-            _goNext();
-          }
-        });
-      }).catchError((_) { _fadeCtrl.forward(); _goNext(); });
+      }).catchError((_) => _fadeCtrl.forward());
   }
 
   @override
@@ -195,8 +183,22 @@ class _SplashVideoPageState extends State<SplashVideoPage> with TickerProviderSt
         _videoController.setVolume(1.0);
         _videoController.setLooping(false);
         _fadeCtrl.forward();
+
+        _videoController.addListener(() {
+          if (!_videoController.value.isInitialized) return;
+
+          final position = _videoController.value.position;
+          final duration = _videoController.value.duration;
+
+          if (duration > Duration.zero &&
+              position >= duration &&
+              !_videoController.value.isPlaying) {
+            _goNext();
+          }
+        });
       }).catchError((_) {
         _fadeCtrl.forward();
+        _goNext();
       });
 
   }
